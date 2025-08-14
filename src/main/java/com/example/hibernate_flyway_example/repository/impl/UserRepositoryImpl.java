@@ -1,5 +1,6 @@
 package com.example.hibernate_flyway_example.repository.impl;
 
+
 import com.example.hibernate_flyway_example.dto.OrderDto;
 import com.example.hibernate_flyway_example.dto.UserDto;
 import com.example.hibernate_flyway_example.entity.User;
@@ -37,8 +38,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<UserDto> findAll() {
-        List<User> users = entityManager.createQuery("select u from User u", User.class)
+        List<User> users = entityManager.createQuery(
+                        "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.orders", User.class)
                 .getResultList();
+
         return users.stream()
                 .map(u -> new UserDto(
                         u.getId(),

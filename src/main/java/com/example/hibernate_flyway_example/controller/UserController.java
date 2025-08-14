@@ -1,5 +1,6 @@
 package com.example.hibernate_flyway_example.controller;
 
+import com.example.hibernate_flyway_example.dto.UserDto;
 import com.example.hibernate_flyway_example.entity.User;
 import com.example.hibernate_flyway_example.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers() {
+    public ResponseEntity<List<UserDto>> getUsers() {
         return ResponseEntity.ok(userService.getAll());
     }
 

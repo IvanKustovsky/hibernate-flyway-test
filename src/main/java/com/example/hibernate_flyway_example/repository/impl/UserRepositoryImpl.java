@@ -1,5 +1,7 @@
 package com.example.hibernate_flyway_example.repository.impl;
 
+import com.example.hibernate_flyway_example.dto.OrderDto;
+import com.example.hibernate_flyway_example.dto.UserDto;
 import com.example.hibernate_flyway_example.entity.User;
 import com.example.hibernate_flyway_example.repository.UserRepository;
 import jakarta.persistence.EntityManager;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @Transactional
@@ -33,9 +36,19 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findAll() {
-        return entityManager.createQuery("select u from User u", User.class)
+    public List<UserDto> findAll() {
+        List<User> users = entityManager.createQuery("select u from User u", User.class)
                 .getResultList();
+        return users.stream()
+                .map(u -> new UserDto(
+                        u.getId(),
+                        u.getName(),
+                        u.getEmail(),
+                        u.getOrders().stream()
+                                .map(o -> new OrderDto(o.getId(), o.getName()))
+                                .collect(Collectors.toList())
+                ))
+                .collect(Collectors.toList());
     }
 
     @Override

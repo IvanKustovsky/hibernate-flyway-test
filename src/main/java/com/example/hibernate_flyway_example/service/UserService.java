@@ -1,5 +1,6 @@
 package com.example.hibernate_flyway_example.service;
 
+import com.example.hibernate_flyway_example.dto.UserDto;
 import com.example.hibernate_flyway_example.entity.User;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface UserService {
 
     Optional<User> getById(Long id);
 
-    List<User> getAll();
+    List<UserDto> getAll();
 
     void delete(Long id);
 }

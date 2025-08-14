@@ -1,6 +1,7 @@
 package com.example.hibernate_flyway_example.repository;
 
 
+import com.example.hibernate_flyway_example.dto.UserDto;
 import com.example.hibernate_flyway_example.entity.User;
 
 import java.util.List;
@@ -10,6 +11,6 @@ public interface UserRepository {
 
     User save(User user);
     Optional<User> findById(Long id);
-    List<User> findAll();
+    List<UserDto> findAll();
     void deleteById(Long id);
 }

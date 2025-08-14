@@ -1,5 +1,6 @@
 package com.example.hibernate_flyway_example.service.impl;
 
+import com.example.hibernate_flyway_example.dto.UserDto;
 import com.example.hibernate_flyway_example.entity.User;
 import com.example.hibernate_flyway_example.repository.UserRepository;
 import com.example.hibernate_flyway_example.service.UserService;
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<UserDto> getAll() {
         return userRepository.findAll();
     }
 
